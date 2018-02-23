@@ -16,7 +16,7 @@ microservice.latency=10, 18, 25, 67, 85, 130, 200, 300, 500, 1000
 microservice.httpStatusCode=NO_CONTENT, OK, ACCEPTED, CREATED, INTERNAL_SERVER_ERROR, SERVICE_UNAVAILABLE
 ```
 
-**httpStatusCode** property, you have to use Spring's Framework [HttpStatus](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html) enum values.
+For **httpStatusCode** property, you must use Spring's Framework [HttpStatus](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html) enum values.
 
 **latency** property is in the order of magnitude of milliseconds.
 
@@ -33,4 +33,4 @@ time curl -v localhost:8080/mock
 ## Additional Info
 
 - You can also use POST, PUT and DELETE verbs
-- If you want to increase the chance of a specific response (latency and/or staus code), just repeat the desired value in the given property 
+- If you want to increase the chance of a specific response (latency and/or HTTP status code), just repeat the desired value in the given property 
