@@ -1,6 +1,6 @@
 # Microservice Simulator
 
-The goal of this project, is to act as a Microservice simulator, so you can simulate success and error scenarios. This project also simulates latency conditions, that is very useful to check if your retry and exponential backoff policies are working as expected.
+The goal of this (simple) project, is to act like a real Microservice, so you can simulate success and error scenarios. This project also simulates latency conditions, that is very useful to check if your retry and exponential backoff policies are working as expected.
 
 You can configure which status codes will be returned. In the same way, you can configure a latency range.
 
@@ -28,4 +28,7 @@ java -jar target/*.jar
 time curl -v localhost:8080/mock
 ```
 
-You can also use POST, PUT and DELETE verbs.
+## Additional Info
+
+- You can also use POST, PUT and DELETE verbs.
+- If you want to increase the chance of a specific response (latency and/or staus code), just repeat in the given property 
