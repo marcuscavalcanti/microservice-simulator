@@ -17,55 +17,53 @@ import java.util.Random;
 @RequestMapping(MicroserviceSimulatorController.MOCK_RESOURCE)
 public class MicroserviceSimulatorController {
 
-    private static final Logger log = LoggerFactory.getLogger(MicroserviceSimulatorController.class);
+	private static final Logger log = LoggerFactory.getLogger(MicroserviceSimulatorController.class);
 
-    static final String MOCK_RESOURCE = "/mock/**";
-    
-    @Value("${microservice.latency:7, 10, 18, 25, 37, 67, 85, 100, 130, 200, 250, 300,500}")
-    private int[] latencyRange;
-    
-    @Value("#{'${microservice.httpStatusCode:NO_CONTENT,OK,ACCEPTED,CREATED,INTERNAL_SERVER_ERROR,SERVICE_UNAVAILABLE,BAD_GATEWAY}'.split(',')}") 
-    private List<String> statusCode;
-	
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity put() {
-        return getResponseEntity();
-    }
+	static final String MOCK_RESOURCE = "/mock/**";
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity post() {
-        return getResponseEntity();
-    }
+	@Value("${microservice.latency:7, 10, 18, 25, 37, 67, 85, 100, 130, 200, 250, 300,500}")
+	private int[] latencyRange;
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity get() {
-        return getResponseEntity();
-    }
+	@Value("#{'${microservice.httpStatusCode:NO_CONTENT,OK,ACCEPTED,CREATED,INTERNAL_SERVER_ERROR,SERVICE_UNAVAILABLE,BAD_GATEWAY}'.split(',')}")
+	private List<String> statusCode;
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity delete() {
-        return getResponseEntity();
-    }
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity put() {
+		return getResponseEntity();
+	}
 
-    private ResponseEntity getResponseEntity() {		
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity post() {
+		return getResponseEntity();
+	}
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity get() {
+		return getResponseEntity();
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE)
+	public ResponseEntity delete() {
+		return getResponseEntity();
+	}
+
+	private ResponseEntity getResponseEntity() {
 		try {
-            Integer millis = latencyRange[new Random().nextInt(latencyRange.length)];
+			Integer millis = latencyRange[new Random().nextInt(latencyRange.length)];
+			
+			log.info("Simulating latency: [ {} ] ms.", millis);
 
-            log.info("Simulating latency: ["+millis+"] milliseconds");
+			Thread.sleep(millis);
 
-            Thread.sleep(millis);
-            
-        } catch (InterruptedException e) {
-        		log.error("Simulating error", e);
-        }
+		} catch (InterruptedException e) {
+			log.error("Simulating error: [ {} ] ms", e);
+		}
+
+		String status = statusCode.get(new Random().nextInt(statusCode.size())).trim();
 		
-		String status = statusCode.get( new Random().nextInt(statusCode.size()) ).trim();
-		
-		log.info("HTTP Status: ["+status+"]");
+		log.info("HTTP status: [ {} ]", status);
 
-        return new ResponseEntity(HttpStatus.valueOf(status));
-    }
-    
-    
+		return new ResponseEntity(HttpStatus.valueOf(status));
+	}
+
 }
-
