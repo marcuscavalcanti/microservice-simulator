@@ -16,7 +16,7 @@ microservice.latency=10, 18, 25, 67, 85, 130, 200, 300, 500, 1000
 microservice.httpStatusCode=NO_CONTENT, OK, ACCEPTED, CREATED, INTERNAL_SERVER_ERROR, SERVICE_UNAVAILABLE
 ```
 
-In **httpStatusCode** property, you must use Spring's [HttpStatus](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html) enum values.
+In **httpStatusCode** property, you have to use Spring's [HttpStatus](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html) enum values.
 
 ## Running
 
