@@ -51,12 +51,12 @@ public class MicroserviceSimulatorController {
 		try {
 			Integer millis = latencyRange[new Random().nextInt(latencyRange.length)];
 			
-			log.info("Simulating latency: [ {} ] ms.", millis);
+			log.info("Simulating latency: [ {} ] ms", millis);
 
 			Thread.sleep(millis);
 
 		} catch (InterruptedException e) {
-			log.error("Simulating error: [ {} ] ms", e);
+			log.error("Simulating error: [ {} ]", e);
 		}
 
 		String status = statusCode.get(new Random().nextInt(statusCode.size())).trim();
