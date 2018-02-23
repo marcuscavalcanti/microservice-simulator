@@ -30,7 +30,15 @@ java -jar target/*.jar
 time curl -v localhost:8080/mock
 ```
 
+cURL Examples:
+```
+curl localhost:8080/mock -v
+curl -X POST localhost:8080/mock -H "Content-Type: application/json" -v
+curl -X PUT localhost:8080/mock -H "Content-Type: application/json" -v
+curl -X DELETE localhost:8080/mock -H "Content-Type: application/json" -v
+```
+
 ## Additional Info
 
 - You can also use POST, PUT and DELETE verbs
-- If you want to increase the chance of a specific response (latency and/or HTTP status code), just repeat the desired value in the given property 
+- If you want to increase the chance of a specific response (latency and/or HTTP status code), just repeat the desired value in the given property
